@@ -1,44 +1,19 @@
 <!DOCTYPE html>
-<html lang="es">
+<html>
 	<head>
-		<meta charset="utf-8">
-		<meta http-equiv="X-UA-Compatible" content="IE=edge">
-		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-		<meta name="robots" content="">
-		<meta name="description" content="">
-		<link rel="canonical" href="">
-		<meta name="author" content="Diego Esteban Zepeda Ceballos">
-		<meta property="og:title" content="">
-		<meta property="og:description" content="">
-		<meta property="og:image" content="">
-		<meta property="og:image:secure_url" content="">
-		<meta property="og:url" content="">
-		<meta property="og:site_name" content="">
-		<meta name="twitter:title" content="">
-		<meta name="twitter:description" content="">
-		<meta name="twitter:image" content="">
-		<meta name="twitter:card" content="summary_large_image">
-		<link rel="stylesheet" href="">
-		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
-		<title>Diego Zepeda</title>
-		<link rel="icon" href="">
-		<link rel="apple-touch-icon" href="">
-		<meta name="msapplication-TileImage" content="">
-		<style type="text/css"></style>
+        {% load static %}
+		<link rel="stylesheet" href="{% static 'estilo.css' %}">
 	</head>
 	<body>
-		<nav></nav>
-		<header>
-			<h1>Diego Zepeda</h1>
-		</header>
 		<main>
-			<section></section>
+			<section>
+                <form action="procesamiento" method="POST">
+                    {% csrf_token %}
+                    <label for="nombre">Dame tu nombre</label>
+                    <input type="text" name="nombre" />
+                    <input type="submit" />
+                </form>
+            </section>
 		</main>
-		<footer></footer>
-		<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-		<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
-		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js" integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V" crossorigin="anonymous"></script>
-		<script src=""></script>
-		<script type="text/javascript"></script>
 	</body>
 </html>

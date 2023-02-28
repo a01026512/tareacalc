@@ -7,3 +7,8 @@ def nuvea():
 
 def index(request):
     return render(request, 'index.html')
+
+def procesamiento(request):
+    nombre = request.POST['nombre']
+    nombre = nombre.title()
+    return render(request, 'proceso.html', {'name':nombre})
