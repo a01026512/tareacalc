@@ -108,11 +108,61 @@ def division(request):
     resultado_json = resultado.toJSON()
     return HttpResponse(resultado_json,content_type ="text/json-comment-filtered")
 
+@csrf_exempt
 def usuarios(request):
+    if (request.method == 'GET'):
+        con = sqlite3.connect("db.sqlite3")
+        cur = con.cursor()
+        res = cur.execute("SELECT * FROM usuarios")
+        resultado = res.fetchall()
+        data = []
+        keys = [column[0] for column in cur.description]
+        for values in resultado:
+            obj = {}
+            for i in range(len(keys)):
+                obj[keys[i]] = values[i]
+            data.append(obj)
+        context = {"data": data}
+        return render(request, "datos.html", context)
+    elif (request.method == 'POST'):
+        return (usuarios_p(request))
+    elif (request.method == "DELETE"):
+        return (usuarios_d(request))
+
+@csrf_exempt
+def usuarios_p(request):
+    body = request.body.decode('UTF-8')
+    eljson = loads(body)
+    grado = eljson['grado']
+    grupo = eljson['grupo']
+    num_lista = eljson['num_lista']
     con = sqlite3.connect("db.sqlite3")
     cur = con.cursor()
-    res = cur.execute("SELECT * FROM usuarios")
-    resultado = res.fetchone()
-    print(resultado)
-    return HttpResponse(resultado)
-    
+    res = cur.execute("INSERT INTO usuarios(grupo, grado, num_lista) VALUES (?, ?, ?)", (grupo, grado, num_lista))
+    con.commit()
+    return HttpResponse('Ok')
+
+@csrf_exempt
+def usuarios_d(request):
+    body = request.body.decode('UTF-8')
+    eljson = loads(body)
+    id_usuario = eljson['id_usuario']
+    con = sqlite3.connect("db.sqlite3")
+    cur = con.cursor()
+    res = cur.execute("DELETE FROM usuarios WHERE id_usuario = ?", (str(id_usuario)))
+    con.commit()
+    return HttpResponse('Ok usuario ' + str(id_usuario) + ' borrado')
+
+@csrf_exempt
+def usuarios_u(request):
+    body = request.body.decode('UTF-8')
+    eljson = loads(body)
+    id_usuario = eljson['id_usuario']
+    grado = eljson['grado']
+    grupo = eljson['grupo']
+    num_lista = eljson['num_lista']
+    con = sqlite3.connect("db.sqlite3")
+    cur = con.cursor()
+    res = cur.execute("UPDATE usuarios SET grupo = ?, grado = ?, num_lista = ? WHERE id_usuario = ?", (grupo, grado, num_lista, str(id_usuario)))
+    con.commit()
+    return HttpResponse('Ok usuario ' + str(id_usuario) + ' actualizado')

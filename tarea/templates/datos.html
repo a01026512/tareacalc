@@ -7,11 +7,12 @@
 	<body>
 		<main>
 			<section>
-                <h1>Lista de jugadores del juego</h1>
+                <h1>Lista de usuarios</h1>
 				<ul>
-					{% for j in lista_jugadores%}
+					<li>id_usuario, grupo, grado, num_lista</li>
+					{% for i in data%}
 					<li>
-						{{j.nombre}} : {{j.minutos_jugados}}
+						{{i.id_usuario}} : {{i.grupo}} : {{i.grado}} : {{i.num_lista}}
 					</li>
 					{% endfor%}
 				</ul>
