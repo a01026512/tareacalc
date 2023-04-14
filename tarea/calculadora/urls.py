@@ -32,8 +32,8 @@ urlpatterns = [
     path('procesologin', views.procesologin, name='procesologin'),
     path('valida_usuario', views.valida_usuario, name='valida_usuario'),
 
-    path('barras', views.barras, name='barras'),
     path('grafica', views.grafica, name='grafica'),
+    # path('grafica', views.grafica, name='grafica'),
     path('login2', views.login2, name='login2'),
 
 ]

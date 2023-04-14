@@ -218,7 +218,7 @@ def login(request):
 def login2(request):
     return render (request, 'login.html')
 
-def barras(request):
+def grafica(request):
     '''
     data = [
           ['Jugador', 'Minutos Jugados'],
@@ -231,7 +231,7 @@ def barras(request):
     data = []
     data.append(['Jugador', 'Minutos Jugados'])
     resultados = Reto.objects.all() #select * from reto; #Aqui debe de ir un query 
-    titulo = 'Videojuego Odyssey'
+    titulo = 'Actividad Creación de end point y gráfica'
     titulo_formato = dumps(titulo)
     subtitulo= 'Total de minutos por jugador'
     subtitulo_formato = dumps(subtitulo)
@@ -244,56 +244,56 @@ def barras(request):
         elJSON = {'losDatos':data_formato,'titulo':titulo_formato,'subtitulo':subtitulo_formato}
         return render(request,'barras.html',elJSON)
     else:
-        return HttpResponse("<h1> No hay registros a mostrar</h1>")
+        return HttpResponse("<h1>No hay registros a mostrar</h1>")
 
 
 #Ejemplo de como funciona 
 
-def grafica(request):
-    #h_var : The title for horizontal axis
-    h_var = 'X'
+# def grafica(request):
+#     #h_var : The title for horizontal axis
+#     h_var = 'X'
 
-    #v_var : The title for horizontal axis
-    v_var = 'Y'
+#     #v_var : The title for horizontal axis
+#     v_var = 'Y'
 
-    #data : A list of list which will ultimated be used 
-    # to populate the Google chart.
-    data = [[h_var,v_var]]
-    """
-    An example of how the data object looks like in the end: 
-        [
-          ['Age', 'Weight'],
-          [ 8,      12],
-          [ 4,      5.5],
-          [ 11,     14],
-          [ 4,      5],
-          [ 3,      3.5],
-          [ 6.5,    7]
-        ]
-    The first list will consists of the title of horizontal and vertical axis,
-    and the subsequent list will contain coordinates of the points to be plotted on
-    the google chart
-    """
+#     #data : A list of list which will ultimated be used 
+#     # to populate the Google chart.
+#     data = [[h_var,v_var]]
+#     """
+#     An example of how the data object looks like in the end: 
+#         [
+#           ['Age', 'Weight'],
+#           [ 8,      12],
+#           [ 4,      5.5],
+#           [ 11,     14],
+#           [ 4,      5],
+#           [ 3,      3.5],
+#           [ 6.5,    7]
+#         ]
+#     The first list will consists of the title of horizontal and vertical axis,
+#     and the subsequent list will contain coordinates of the points to be plotted on
+#     the google chart
+#     """
 
-    #The below for loop is responsible for appending list of two random values  
-    # to data object
-    for i in range(0,11):
-        data.append([randrange(101),randrange(101)])
+#     #The below for loop is responsible for appending list of two random values  
+#     # to data object
+#     for i in range(0,11):
+#         data.append([randrange(101),randrange(101)])
 
-    #h_var_JSON : JSON string corresponding to  h_var
-    #json.dumps converts Python objects to JSON strings
-    h_var_JSON = dumps(h_var)
+#     #h_var_JSON : JSON string corresponding to  h_var
+#     #json.dumps converts Python objects to JSON strings
+#     h_var_JSON = dumps(h_var)
 
-    #v_var_JSON : JSON string corresponding to  v_var
-    v_var_JSON = dumps(v_var)
+#     #v_var_JSON : JSON string corresponding to  v_var
+#     v_var_JSON = dumps(v_var)
 
-    #modified_data : JSON string corresponding to  data
-    modified_data = dumps(data)
+#     #modified_data : JSON string corresponding to  data
+#     modified_data = dumps(data)
 
-    #Finally all JSON strings are supplied to the charts.html using the 
-    # dictiory shown below so that they can be displayed on the home screen
-    return render(request,"charts.html",{'values':modified_data,\
-        'h_title':h_var_JSON,'v_title':v_var_JSON})
+#     #Finally all JSON strings are supplied to the charts.html using the 
+#     # dictiory shown below so that they can be displayed on the home screen
+#     return render(request,"charts.html",{'values':modified_data,\
+#         'h_title':h_var_JSON,'v_title':v_var_JSON})
 
 #Ruta para el proceso del login (invocación del servicio de verificación de usuario)
 
